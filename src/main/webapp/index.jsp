@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>index</title>
+    <title>index page</title>
 </head>
 <body>
-<h1>Hello, JSP!</h1>
-<pre>
-    部署
-    deploy
-</pre>
+<form action="">
+    <input type="text" placeholder="邮箱"><br>
+    <input type="password"  placeholder="密码"><br>
+    <input type="submit" value="登陆"><br>
+</form>
+<a href="signup.jsp">注册</a>
 </body>
 </html>
