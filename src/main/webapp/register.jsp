@@ -1,3 +1,7 @@
+<%@ page import="com.mysql.jdbc.Driver" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Connection" %>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -18,6 +22,18 @@
     out.print(mobile);
     String password = request.getParameter("password");
     out.print(password);
+
+    new Driver();
+    Connection connection = DriverManager.getConnection("jdbc:mysql:///?user=root&password=system");
+    String sql = "INSERT INTO db_javaee.user VALUE (NULL ,?,?,?)";
+    PreparedStatement statement = connection.prepareStatement(sql);
+    statement.setString(1, nick);
+    statement.setString(2, mobile);
+    statement.setString(3, password);
+    statement.executeUpdate();
+    statement.close();
+    connection.close();
+    response.sendRedirect("index.jsp"); // ?
 %>
 </body>
 </html>
