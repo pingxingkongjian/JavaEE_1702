@@ -11,11 +11,22 @@
     <title>index page</title>
 </head>
 <body>
-<form action="">
+<h1>index page</h1>
+<form action="login.jsp">
     <input type="text" name="mobile" placeholder="手机号"><br>
-    <input type="password"  placeholder="密码"><br>
+    <input type="password" name="password" placeholder="密码"><br>
     <input type="submit" value="登陆"><br>
 </form>
+<%--<%=(request.getAttribute("message") != null) ? request.getAttribute("message") : ""%>--%>
+<p>
+    <%
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            out.print(message);
+        }
+    %>
+</p>
 <a href="signup.jsp">注册</a>
+
 </body>
 </html>
