@@ -11,11 +11,11 @@
     <title>index page</title>
 </head>
 <body>
-<h1>index page</h1>
-<form action="login.jsp">
+<h1>登录<%=session.getId()%></h1>
+<form action="login" method="post">
     <input type="text" name="mobile" placeholder="手机号"><br>
     <input type="password" name="password" placeholder="密码"><br>
-    <input type="submit" value="登陆"><br>
+    <input type="submit" value="登录">
 </form>
 <%--<%=(request.getAttribute("message") != null) ? request.getAttribute("message") : ""%>--%>
 <p>
@@ -27,6 +27,5 @@
     %>
 </p>
 <a href="signup.jsp">注册</a>
-
 </body>
 </html>
