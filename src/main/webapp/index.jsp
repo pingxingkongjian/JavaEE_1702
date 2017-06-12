@@ -1,31 +1,41 @@
 <%--
   Created by IntelliJ IDEA.
   User: HP
-  Date: 2017/6/6
-  Time: 11:00
+  Date: 2017/6/7
+  Time: 14:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>index page</title>
+    <title>Title</title>
 </head>
 <body>
-<h1>登录<%=session.getId()%></h1>
-<form action="login" method="post">
-    <input type="text" name="mobile" placeholder="手机号"><br>
-    <input type="password" name="password" placeholder="密码"><br>
-    <input type="submit" value="登录">
+<%
+    if (session.getAttribute("nick") == null) {
+        response.sendRedirect("default.jsp");
+    }
+%>
+<h1>主页</h1>
+<p><%=session.getAttribute("nick")%></p>
+<%
+    pageContext.setAttribute("key", "value");
+    application.setAttribute("app-key", "app-value");
+%>
+<p><a href="user?action=logout">注销</a></p>
+<hr>
+<form action="student" method="post">
+    <input type="hidden" name="action" value="add">
+    <input type="text" name="name" placeholder="姓名"><br>
+    <input type="text" name="gender" placeholder="性别"><br>
+    <input type="date" name="dob" placeholder="出生日期"><br>
+    <input type="submit" value="添加">
 </form>
-<%--<%=(request.getAttribute("message") != null) ? request.getAttribute("message") : ""%>--%>
-<p>
-    <%
-        String message = (String) request.getAttribute("message");
-        if (message != null) {
-            out.print(message);
-        }
-    %>
-</p>
-<a href="signup.jsp">注册</a>
+<%
+    String message = (String) request.getAttribute("message");
+    if (message != null) {
+        out.print(message);
+    }
+%>
 </body>
 </html>
