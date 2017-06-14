@@ -19,14 +19,7 @@
     <input type="submit" value="登录">
 </form>
 <%--<%=(request.getAttribute("message") != null) ? request.getAttribute("message") : ""%>--%>
-<p>
-    <%
-        String message = (String) request.getAttribute("message");
-        if (message != null) {
-            out.print(message);
-        }
-    %>
-</p>
+<p>${requestScope.message}</p>
 <a href="signup.jsp">注册</a>
 </body>
 </html>

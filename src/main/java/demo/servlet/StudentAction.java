@@ -26,7 +26,7 @@ public class StudentAction extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
-            if ("add".equals(action)) {
+        if ("add".equals(action)) {
             add(req, resp);
             return;
         }
@@ -55,7 +55,6 @@ public class StudentAction extends HttpServlet {
         req.getRequestDispatcher("default.jsp").forward(req, resp);
     }
 
-
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String gender = req.getParameter("gender");
@@ -64,14 +63,14 @@ public class StudentAction extends HttpServlet {
         Connection connection = Db.getConnection();
         PreparedStatement preparedStatement = null;
 
-        String sql = "INSERT INTO db_javaee.student VALUE(NULL,?,?,?)";
+        String sql = "INSERT INTO db_javaee.student VALUE(NULL, ?, ?, ?)";
 
         try {
             if (connection != null) {
                 preparedStatement = connection.prepareStatement(sql);
             } else {
                 req.setAttribute("message", "Error.");
-                req.getRequestDispatcher("default.jsp").forward(req, resp);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
                 return;
             }
             preparedStatement.setString(1, name);
@@ -80,7 +79,7 @@ public class StudentAction extends HttpServlet {
 
             preparedStatement.executeUpdate();
 
-            resp.sendRedirect("default.jsp");
+            resp.sendRedirect("student?action=queryAll");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,12 +112,12 @@ public class StudentAction extends HttpServlet {
                         resultSet.getString("dob"));
                 students.add(student);
             }
-            req.getSession().setAttribute("students", students); // ?
+            req.getSession().setAttribute("students", students);
             resp.sendRedirect("index.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            Db.close(resultSet, preparedStatement, connection); // ?
+            Db.close(resultSet, preparedStatement, connection);
         }
     }
 
